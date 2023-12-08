@@ -1,4 +1,9 @@
 /*
+Author: Nicholas Holtman
+Date: Thursday, December 7, 2023
+
+H/T to NeetCode at https://www.youtube.com/watch?v=KLlXCFG5TnA
+
 Two Sum solution concept (reproduced from memory)
 
 The two sum problem gives us an array of integers and a target integer, and asks us to find the two numbers in the array that add up to the target. We are allowed to assume there will be exactly one solution, and not allowed to use the same entry twice). For example:
