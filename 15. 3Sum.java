@@ -74,7 +74,7 @@ This is the same x-value again, so we move it yet again.
           ^x ^l ^r      
 
 4 != 3, so we can proceed to reset the left and right pointers to perform Two Sum II. 
-aeoli.pera — Today at 5:22 PM
+
  3, 3, 3, 4, 5, 6, 7, 8 
          x^  ^l       ^r
 
