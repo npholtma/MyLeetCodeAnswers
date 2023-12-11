@@ -97,6 +97,7 @@ When we run through the possibilities of this Two Sum II iteration...
 Pseudocode
 
 Initialize list of lists 'solutionSet'
+Sort array
 Let xIndex be 0, leftIndex be 1, and rightIndex be end of array
 while xIndex > leftIndex
 	let leftIndex be xIndex + 1
@@ -113,4 +114,39 @@ return solutionSet
 
 wew!
 I'll have to pick this back up tomorrow, I'm not 100% sure that's going to work.
+
+Update: Forgot to add the step to sort the array.
 */
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> solutionSet = new ArrayList<>();
+        Arrays.sort(nums);
+
+        for (int xIndex = 0; xIndex < nums.length - 2; xIndex++) {
+            if (xIndex == 0 || (xIndex > 0 && nums[xIndex] != nums[xIndex - 1])) {
+                int leftIndex = xIndex + 1;
+                int rightIndex = nums.length - 1;
+
+                while (leftIndex < rightIndex) {
+                    if (nums[xIndex] + nums[leftIndex] + nums[rightIndex] == 0) {
+                        solutionSet.add(Arrays.asList(nums[xIndex], nums[leftIndex], nums[rightIndex]));
+                        while (leftIndex < rightIndex && nums[leftIndex] == nums[leftIndex + 1]) leftIndex++;
+                        while (leftIndex < rightIndex && nums[rightIndex] == nums[rightIndex - 1]) rightIndex--;
+                        leftIndex++;
+                        rightIndex--;
+                    } else if (nums[xIndex] + nums[leftIndex] + nums[rightIndex] < 0) {
+                        leftIndex++;
+                    } else {
+                        rightIndex--;
+                    }
+                }
+            }
+        }
+        return solutionSet;
+    }
+}
