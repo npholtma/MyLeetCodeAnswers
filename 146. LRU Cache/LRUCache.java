@@ -83,90 +83,94 @@ import java.util.HashMap;
 
 class LRUCache {
 
-    public class Node {
-        public int key;
-        public int value;
-        public Node prev;
-        public Node next;
+	public class Node {
+		public int key;
+		public int value;
+		public Node prev;
+		public Node next;
 
-        public Node(int key, int value) {
-            this.key = key;
-            this.value = value;
-            this.prev = null;
-            this.next = null;
-        }
-    }
+		public Node(int key, int value) {
+			this.key = key;
+			this.value = value;
+			this.prev = null;
+			this.next = null;
+		}
+	}
 
-    private int capacity;
-    private int numNodes;
-    private Node lru;
-    private Node mru;
-    private HashMap<Integer, Node> cache; // The int maps to "key" in Node. 
+	private int capacity;
+	private int numNodes;
+	private Node lru; // lru.next will always be null
+	private Node mru; // mru.prev will always be null
+	private HashMap<Integer, Node> cache; // The int maps to "key" in Node. 
 
-    public LRUCache(int capacity) {
-        this.capacity = capacity;
-        this.numNodes = 0;
-        this.lru = null;
-        this.mru = null;
-        this.cache = new HashMap<>();
-    }
+	public LRUCache(int capacity) {
+		this.capacity = capacity;
+		this.numNodes = 0;
+		this.lru = null;
+		this.mru = null;
+		this.cache = new HashMap<>();
+	}
 
-    public int get(int key) {
-        if (cache.containsKey(key)) {
-            Node node = removeNode(key);
-            cache.remove(key);
-            cache.put(key, node);
-            addNode(node);
-            return cache.get(key).value;
-        }
-        return -1;
-    }
+	public int get(int key) {
+		if (cache.containsKey(key)) {
+			Node node = removeNode(key);
+			addNode(node);
+			return cache.get(key).value;
+		}
+		return -1;
+	}
 
-    public void put(int key, int value) {
-        Node newNode = new Node(key, value);
-        if (cache.containsKey(key)) {
-            removeNode(key); // Will move to MRU
-            cache.remove(key);
-        } else if (numNodes >= capacity) {
-            removeNode(lru.key); // Evict LRU
-            cache.remove(lru.key);
-        }
-        addNode(newNode);
-        cache.put(key, newNode);
-    }
+	public void put(int key, int value) {
+		Node newNode = new Node(key, value);
+		if (cache.containsKey(key)) {
+			removeNode(key); // Will move to MRU
+		} 
+		else if (numNodes >= capacity) {
+			removeNode(lru.key); // Evict LRU
+		}
+		addNode(newNode);
+	}
 
-    private void addNode(Node newNode) {
-        if (numNodes == 0) {
-            mru = newNode;
-            lru = newNode;
-            newNode.next = null;
-            newNode.prev = null;
-            numNodes++;
-            return;
-        }
-        if (numNodes >= capacity) {
-            removeNode(lru.key); // Remove the LRU node
-        }
-        numNodes++;
-        newNode.next = mru;
-        mru.prev = newNode;
-        mru = newNode;
-    }
+	private void addNode(Node newNode) {
+		if (numNodes == 0) {
+			mru = newNode;
+			lru = newNode;
+			newNode.next = null;
+			newNode.prev = null;
+			numNodes++;
+			cache.put(newNode.key, newNode);
+			return;
+		}
+		if (numNodes >= capacity) {
+			removeNode(lru.key);
+		}
+		numNodes++;
+		newNode.next = mru;
+		newNode.prev = null;
+		mru.prev = newNode;
+		mru = newNode;
+		cache.put(newNode.key, newNode);
+	}
 
-    private Node removeNode(int key) {
-        Node node = cache.get(key);
-        if (node.prev != null) {
-            node.prev.next = node.next;
-        }
-        if (node.next != null) {
-            node.next.prev = node.prev;
-        }
-        if (node == lru) {
-            lru = lru.next; // Update LRU pointer
-        }
-        numNodes--;
-        return node;
-    }
+	private Node removeNode(int key) {
+		Node node = cache.get(key);
+
+		if (node.prev != null) {
+			node.prev.next = node.next;
+		}
+		if (node.next != null) {
+			node.next.prev = node.prev;
+		}
+		if (node == lru) {
+			lru = lru.prev;
+		}
+		if (node == mru) {
+			mru = mru.next;
+		}
+		cache.remove(key);
+		numNodes--;
+		return node;
+	}
 }
 
 /**
