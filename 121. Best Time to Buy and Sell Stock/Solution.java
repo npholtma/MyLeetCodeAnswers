@@ -1,4 +1,7 @@
 /*
+Author: Nicholas Holtman
+Date: Saturday, December 30, 2023
+
 Leetcode 121: Best Time to Buy and Sell Stock
 
 H/T to NeetCode at https://www.youtube.com/watch?v=1pkOgXD63yU&list=PLot-Xpze53ldVwtstag2TL4HQhAnC8ATf&index=2&ab_channel=NeetCode. This is my attempt to recreate his solution from memory (eight days later!).

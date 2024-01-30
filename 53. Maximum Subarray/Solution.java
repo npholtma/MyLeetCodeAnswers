@@ -1,4 +1,7 @@
 /*
+Author: Nicholas Holtman
+Date: Saturday, December 20, 2023
+
 Conceptual solution for LeetCode 53, Maximum Subarray
 
 As always H/T to NeetCode at https://www.youtube.com/watch?v=5WZl3MMT0Eg&list=PLot-Xpze53leF0FeHz2X0aG3zd0mr1AW_&index=15&t=1s&ab_channel=NeetCode
