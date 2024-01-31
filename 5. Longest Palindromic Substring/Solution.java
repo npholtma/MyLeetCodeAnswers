@@ -1,4 +1,7 @@
 /*
+Author: Nicholas Holtman
+Date: Tuesday, January 30, 2024
+
 All right, LeetCode time...
 
 Longest Palindromic Substring - Python - Leetcode 5
