@@ -14,7 +14,7 @@ Array: 3, 3, 3, 4, 5, 6, 7, 8
 Target: 14
 
 When x = 3, then we find the triples (3, 4, 7), (3, 3, 8), and (3, 5, 6). If we naively move the pointer to the right and select x = 3 again, we'll produce the same triplets. (We also want to avoid finding duplicates like (8, 3, 3) but this algorithm takes care of that.)
-aeoli.pera — Today at 5:14 PM
+
 So for this example we start an x pointer at index 0:
 
  3, 3, 3, 4, 5, 6, 7, 8
