@@ -32,7 +32,7 @@ To avoid the inefficiency of a two-pass solution, we can move these pointers bas
 If the sum of the pointers is higher than the target, move the right pointer one to the left.
 If the sum of the pointers is lower than the target, move the left pointer one to the left.
 (3. If the pointers are right next to each other this must be the solution.) 
-aeoli.pera — Today at 2:50 PM
+
 In the example above, 6+11 = 17 which is more than the target of 16, so we move the right pointer:
 
 4, 6, 9, 10, 11, 15, 18, 20
